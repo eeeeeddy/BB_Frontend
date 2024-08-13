@@ -66,7 +66,7 @@ function Feed({ feedData }) {
                             <div>
                                 <div className='d-flex justify-content-center'>
                                     <div className='d-flex justify-content-start mb-3' style={{ width: "50%" }}>
-                                        <Link to={`/profile/${feedData.nickName}`} style={{ textDecorationLine: "none", color: "white" }}><img className='userimg' src={feedData.userImgSrc} alt="User Avatar" style={{ width: '40px', height:'40px', marginRight:'13px'}} />
+                                        <Link to={`/profile/${feedData.nickName}`} style={{ textDecorationLine: "none", color: "white" }}><img className='userimg' src={feedData.userImgSrc} alt="User Avatar" style={{ width: '40px', height:'40px', marginRight:'13px', borderRadius:'50%'}} />
                                             <b>{feedData.nickName}</b>
                                         </Link>
                                     </div>

@@ -177,7 +177,7 @@ function FeedDetail({ onClose, music }) {
                                         <hr />
                                         <div className='justify-content-start text-start' style={{ height: "20vh", overflow: "scroll" }}>
                                             {commentList.map((data) => (
-                                                <p key={data.id}> <img className='userimg' src={music.userImgSrc} alt="User Avatar" style={{ width: '30px', height:'30px' , backgroundColor:"white" }} /> {data.nickName} : {data.comment}</p>
+                                                <p key={data.id}> <img className='userimg' src={data.userImgSrc} alt="User Avatar" style={{ width: '30px', height:'30px',borderRadius:'50%', backgroundColor:"white" }} /> {data.nickName} : {data.comment}</p>
                                             ))}
                                         </div>
                                         <div className="d-flex justify-content-center" id='search'>

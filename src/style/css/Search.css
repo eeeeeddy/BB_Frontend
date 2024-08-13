@@ -1,0 +1,81 @@
+.search-input {
+
+    width: 100%;
+    height: 50px;
+    display: flex;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    align-items: center;
+    justify-content: center;
+    background-color: #2d2d2d;
+    padding: 0 15px;
+    border-radius: 10px;
+    border: 1px solid rgb(63, 63, 63);
+}
+.search-input .textInput{
+    width: 90%;
+    height: 100%;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    padding: 10px;
+    padding-left: 10px;
+    color: white;
+}
+.search-input:focus-within {
+    border: 1px solid rgb(110, 110, 110);
+}
+
+/* 필터 */
+.filterbtn {
+    font-size: 18px;
+    color: #e1e1e1;
+    cursor: pointer;
+    position: relative;
+    border: none;
+    background: none;
+    text-transform: uppercase;
+    transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+    /* transition-duration: 400ms;
+    transition-property: color; */
+
+    
+}
+  
+.filterbtn:focus,
+.filterbtn:hover {
+    color: #FEF164;
+}
+  
+.filterbtn:focus:after,
+.filterbtn:hover:after {
+    width: 100%;
+    left: 0%;
+    
+}
+  
+.filterbtn:after {
+    content: "";
+    pointer-events: none;
+    bottom: -2px;
+    left: 50%;
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    background-color: #FEF164;
+    /* transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition-duration: 400ms;
+    transition-property: width, left; */
+    box-shadow: 0px 2px 5px rgba(254, 241, 100, 0.8); /* 그림자 추가 */
+    transition: width 400ms cubic-bezier(0.25, 0.8, 0.25, 1), left 400ms cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+
+.filterbtn.selected {
+    color: #FEF164; /* 선택된 버튼의 텍스트 색상 */
+}
+
+.filterbtn.selected:after {
+    width: 100%; /* 선택된 버튼에 밑줄이 항상 표시되도록 */
+    left: 0%;
+}

@@ -6,16 +6,18 @@ import PlayListText from './PlayListText';
 import axios from 'axios';
 import { FaArrowLeft } from "react-icons/fa";
 import CreatePost from '../Post/CreatePost';
+import { IoText } from 'react-icons/io5';
 
 function PlayListSearch({ onClose, searchKeyword }) {
     const modalRef = useRef(null);
+    const currentUser = window.localStorage.getItem('nickName');
     const [isPlstListTextOpen, setIsPlayListTextOpen] = useState(false);
     const [isCreatePostOpen, setIsCreatePostOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
     const [searchResults, setSearchResults] = useState([]);
     const [originalResults, setOriginalResults] = useState([]);
 
-    // TODO: PlayListText에서 되돌아왔을 때 검색했던 결과 보여주어야함.
+
     // TODO: db에 없는 해시태그 검색 시 알림창 띄우기
     console.log("검색어", searchKeyword);
 
@@ -64,7 +66,9 @@ function PlayListSearch({ onClose, searchKeyword }) {
         })
             .then((response) => {
                 const temp = response.data
-                setSearchResults(temp)
+
+                const filteredResult = temp.filter(item => item.nickName === currentUser);
+                setSearchResults(filteredResult)
                 setOriginalResults(temp)
             })
             .catch((error) => {

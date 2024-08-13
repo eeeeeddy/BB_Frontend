@@ -15,11 +15,11 @@ import axios from 'axios';
 import MiniPlayer from '../components/Player/MiniPlayer';
 
 function Profile() {
-    const { nickName } = useParams();
+    const { nickName } = useParams(); //상대 유저 닉네임
     const [activeTab, setActiveTab] = useState('post');
     const [postCount, setPostCount] = useState(null);
     const [userInfo, setUserInfo] = useState([]);
-    const userNickname = localStorage.getItem("nickName");
+    const userNickname = localStorage.getItem("nickName");  //현재 로그인 한 유저
     const [isOwnProfile, setIsOwnProfile] = useState(false);
     const [isFollowed, setIsFollowed] = useState(false);
 
@@ -47,7 +47,6 @@ function Profile() {
                     },
                 })
                     .then((response) => {
-                        console.log(response.data)
                         const followingNickNames = response.data.followingNickNames || [];
                         setIsFollowed(followingNickNames.includes(nickName));
                     })
@@ -55,9 +54,6 @@ function Profile() {
                         console.error('followINFO API 요청 중 오류 발생:', error);
                     });
             }
-
-            const followingNickNames = response.data.followingNickNames || [];
-            setIsFollowed(followingNickNames.includes(userNickname));
         })
         .catch((error) => {
             console.error('API 요청 중 오류 발생:', error);
@@ -67,41 +63,68 @@ function Profile() {
     }, [nickName, userNickname]);
 
 
-    const handleFollowToggle = () =>{
-        const requestData = {
-            followerNickName : `${nickName}`, 
-        };
+    // const handleFollowToggle = () =>{
+    //     const requestData = {
+    //         "followerNickName" : `${nickName}`, 
+    //     };
 
-        if(isFollowed){
-            //언팔
-            axios.post('http://localhost:8080/api/follow/unfollow',requestData, {
-                headers:{
-                    'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
-                    'ngrok-skip-browser-warning': '69420',
-                },
-            })
-            .then((response) => {
-                console.log('언팔로우 성공')
+    //     if(isFollowed){
+    //         //언팔
+    //         axios.post('http://localhost:8080/api/follow/unfollow',requestData, {
+    //             headers:{
+    //                 'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
+    //                 'ngrok-skip-browser-warning': '69420',
+    //             },
+    //         })
+    //         .then((response) => {
+    //             console.log('언팔로우 성공')
+    //             setIsFollowed(false);
+    //         })
+    //         .catch((error) => {
+    //             console.log('언팔로우 실패', error);
+    //         });
+    //     } else {
+    //         axios.post('http://localhost:8080/api/follow/follow',requestData, {
+    //             headers:{
+    //                 'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
+    //                 'ngrok-skip-browser-warning': '69420',
+    //             },
+    //         })
+    //         .then((response) => {
+    //             console.log('팔로우 성공');
+    //             setIsFollowed(true);
+    //         })
+    //         .catch((error) => {
+    //             console.log('팔로우 실패', error);
+    //         });
+    //     }
+    // };
+
+    const handleFollowToggle = () => {
+        const requestData = {
+            "followerNickName": nickName,
+        };
+    
+        const apiUrl = isFollowed ? 'http://localhost:8080/api/follow/unfollow' : 'http://localhost:8080/api/follow/follow';
+    
+        axios.post(apiUrl, requestData, {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
+                'ngrok-skip-browser-warning': '69420',
+            },
+        })
+        .then((response) => {
+            if (isFollowed) {
+                console.log('언팔로우 성공');
                 setIsFollowed(false);
-            })
-            .catch((error) => {
-                console.log('언팔로우 실패', error);
-            });
-        } else {
-            axios.post('http://localhost:8080/api/follow/follow',requestData, {
-                headers:{
-                    'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
-                    'ngrok-skip-browser-warning': '69420',
-                },
-            })
-            .then((response) => {
+            } else {
                 console.log('팔로우 성공');
                 setIsFollowed(true);
-            })
-            .catch((error) => {
-                console.log('팔로우 실패', error);
-            });
-        }
+            }
+        })
+        .catch((error) => {
+            console.log('에러 발생:', error);
+        });
     };
 
     const handlePostCount = (count) => {
@@ -119,7 +142,7 @@ function Profile() {
                         {isOwnProfile ? (
                             <div className='user-container d-flex align-items-center mb-3'>
                                 <div className=' col-md-2 offset-md-1 user-img mt-5 '>
-                                    <img className='userimg' src={userInfo.userImgSrc} alt="User Avatar" style={{ width: '150px', height:'150px', backgroundColor:"white" }} />
+                                    <img className='userimg' src={userInfo.userImgSrc} alt="User Avatar" style={{ width: '150px', height:'150px', backgroundColor:"white", borderRadius:'50%' }} />
                                 </div>
                                 <div className=' col-md-6 user-info ml-auto ' style={{ marginLeft: '100px' }}>
                                     <div className="d-flex align-items-center">
@@ -136,7 +159,7 @@ function Profile() {
                         ) : (
                             <div className='user-container d-flex align-items-center mb-3'>
                                 <div className=' col-md-2 offset-md-1 user-img mt-5 '>
-                                    <img className='userimg' src={userInfo.userImgSrc} alt="User Avatar" style={{ width: '150px', height:'150px' , backgroundColor:"white" }} />
+                                    <img className='userimg' src={userInfo.userImgSrc} alt="User Avatar" style={{ width: '150px', height:'150px' , backgroundColor:"white", borderRadius:'50%' }} />
                                 </div>
                                 <div className=' col-md-6 user-info ml-auto ' style={{ marginLeft: '100px' }}>
                                     <div className="d-flex align-items-center">
