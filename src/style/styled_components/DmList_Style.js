@@ -11,17 +11,17 @@ export const ListContainer = styled.ul`
 export const StyledChatButton = styled.li`
 display: flex;
 align-items: center;
-// font-weight: ${({ selected }) => (selected ? 'bold' : 'normal')};
+font-weight: ${({ selected }) => (selected ? 'bold' : 'normal')};
 border: none;
 background: ${({ selected }) => (selected ? '#EAEAEA' : 'gray')};
 transition: background 0.3s;
 
 &:not(:hover) {
-    background: ${({ selected }) => (selected ? '#EAEAEA' : 'black')};
+    background: ${({ selected }) => (selected ? '#EAEAEA' : '#181818')};
 }
 
 &:hover {
-    background: ${({ selected }) => (selected ? '#EAEAEA' : '#242424')}; 
+    background: ${({ selected }) => (selected ? '#EAEAEA' : '#333')}; 
 }
 
 div {

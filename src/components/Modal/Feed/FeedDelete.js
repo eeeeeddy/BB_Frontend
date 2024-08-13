@@ -24,7 +24,6 @@ function FeedDelete({ onClose, feedId }){
                 },
             });
             console.log("삭제성공",res.data);
-            navigate("/playlist");
             handleClose();
 
         } catch(error){

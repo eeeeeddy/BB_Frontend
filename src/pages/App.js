@@ -21,6 +21,12 @@ import FeedEdit from '../components/Modal/Feed/FeedEdit';
 import Playlist from './Playlist';
 import PlayListDetail from './PlayListDetail';
 import MiniPlayer from '../components/Player/MiniPlayer';
+import DmRoom from '../components/DM/DmRoom';
+import PlaylistByLikes from '../components/Playlist/PlaylistByLikes';
+import SearchByPlaylist from '../components/Search/SearchByPlaylist';
+import SearchByFeed from '../components/Search/SearchByFeed';
+import SearchByTag from '../components/Search/SearchByTag';
+
 
 function App() {
     return (
@@ -32,13 +38,18 @@ function App() {
                     <Route path="/signUp" element={<SignUp />} />
                     <Route path="/alarm" element={<Alarm />} />
                     <Route path="/dm" element={<DM />} />
+                    <Route path='/dm/:dmRoomId' element={<DmRoom />} />
                     <Route path="/search" element={<Search />} />
+                    <Route path='/search/playlist' element={<SearchByPlaylist />}/>
+                    <Route path='/search/feed' element={<SearchByFeed />} />
+                    <Route path='/search/tag' element={<SearchByTag />} />
                     <Route path="/profile/:nickName" element={<Profile />} />
                     <Route path="/Profile/edit/:nickName" element={<ProfileEdit />} />
                     <Route path="/feed/:feedId" element={<Feed />} />
                     <Route path="/detail" element={<FeedDetail />} />
                     <Route path="/playlist" element={<Playlist />} />
                     <Route path="/playlistDetail/:nickName/:playlistId" element={<PlayListDetail />} />
+                    <Route path="/playlist/likes" element={<PlaylistByLikes /> }/>
                     <Route path="/miniplayer" element={<MiniPlayer />} />
 
                     {/* Test */}

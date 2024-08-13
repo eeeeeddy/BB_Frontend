@@ -127,7 +127,7 @@ const DmRoom= ({ selectedChatInfo  }) => {
     if (!client.current.connected || message.trim()== '') {
         return;
     }
-    
+
     client.current.publish({
         destination: "/chatting/pub/message",
         headers: { Authorization: window.localStorage.getItem('accessToken') },
@@ -184,23 +184,23 @@ const formatTime = (dateTimeString) => {
                             )}
                             {chat.sender === otherName && (<img className="userimg" src={otherImgSrc} alt="User Avatar" />)}
                             <div className='message'> {chat.message}  </div>
-                                {(index === chatList.length - 1 || isDifferentTime(chat, chatList[index + 1])) && (
-                                    <div className={`count ${chat.sender === otherName ? 'incoming' : 'outgoing'}`}>
+                            {(index === chatList.length - 1 || isDifferentTime(chat, chatList[index + 1])) && (
+                                <div className={`count ${chat.sender === otherName ? 'incoming' : 'outgoing'}`}>
                                     <div className="message-time">{formatTime(chat.createdTime)}</div>
                                     {chat.readCount === 0 && <div className="count">읽음</div>}
-                                    </div>
-                                )}
+                                </div>
+                            )}
                             </div>
                         ))}
+                            </div>
+                        
+                        <div className="dm-input">
+                            <input className="messageInput" type="text" required="" placeholder="메시지 입력.." 
+                            value={message} onChange={(e) => setMessage(e.target.value)} onKeyDown={(e) => handleKeyDown(e)} />
+                            {/* <IoMdSend onClick={handleSendMessage} className="button-send"/> */}
+                            <button onClick={handleSendMessage} className="button-send">send</button>
                         </div>
-                    
-                    <div className="dm-input">
-                        <input className="messageInput" type="text" required="" placeholder="메시지 입력.." 
-                        value={message} onChange={(e) => setMessage(e.target.value)} onKeyDown={(e) => handleKeyDown(e)} />
-                        {/* <IoMdSend onClick={handleSendMessage} className="button-send"/> */}
-                        <button onClick={handleSendMessage} className="button-send">send</button>
                     </div>
-                </div>
                     </>
                     ) : (
                         <div >
