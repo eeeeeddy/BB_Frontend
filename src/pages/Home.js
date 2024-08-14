@@ -7,10 +7,17 @@ import axios from 'axios';
 import Loading from '../components/Loading';
 import MiniPlayer from '../components/Player/MiniPlayer';
 import Feed from './Feed';
+import { postChkAtom } from '../state/PostAtom';
+import { useRecoilValue } from 'recoil';
 
 function Home() {
     const [feedData, setFeedData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const postChk = useRecoilValue(postChkAtom);
+
+    if (postChk) { // Post, Feed 작성 시 새로고침하기 위한 변수
+        window.location.reload();
+    }
 
     useEffect(() => {
         setIsLoading(true); // API 호출 전에 true로 설정하여 로딩화면 띄우기

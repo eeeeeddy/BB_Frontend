@@ -10,6 +10,8 @@ import '@yaireo/tagify/dist/tagify.css';
 import '../../../style/css/Hashtag.css';
 import { FaArrowLeft } from "react-icons/fa";
 import PlayListSearch from './PlayListSearch';
+import { useRecoilState } from 'recoil';
+import { postChkAtom } from '../../../state/PostAtom';
 
 // 가수, 노래제목, 발매연도, 앨범이름, 사진, 플리 타이틀, 글, 해시태그, 작성자
 function PlayListText({ onClose, playlist, searchQuery }) {
@@ -22,6 +24,7 @@ function PlayListText({ onClose, playlist, searchQuery }) {
     const [content, setContent] = useState('');
     const [playlistTitle, setPlaylistTitle] = useState('');
     const musicInfoList = [];
+    const [postChk, setPostChk] = useRecoilState(postChkAtom);
 
     // playlist 배열을 순회하면서 musicInfoList를 추출하여 새로운 배열에 저장
     playlist.forEach(playlist => {
@@ -62,6 +65,7 @@ function PlayListText({ onClose, playlist, searchQuery }) {
                 .then(response => response.text())
                 .then(result => {
                     console.log(result);
+                    setPostChk(true);
                     onClose?.();
                 })
                 .catch(error => console.log('error', error));
