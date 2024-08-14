@@ -63,14 +63,15 @@ function Navbar() {
                 refreshToken: `${window.localStorage.refreshToken}`
             }
         )
-            .then((response) => {
-                console.log("로그아웃 성공", response);
-            })
-            .catch((error) => {
-                console.log("로그아웃 API 호출 중 오류", error);
-            });
+        .then((response) => {
+            console.log("로그아웃 성공", response);
+        })
+        .catch((error) => {
+            console.log("로그아웃 API 호출 중 오류", error);
+        });
 
-        navigate("/login");
+        // navigate("/login");
+        window.location.reload();
     }
 
 

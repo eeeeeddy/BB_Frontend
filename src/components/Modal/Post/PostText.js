@@ -9,6 +9,8 @@ import '../../../style/css/Hashtag.css';
 import { useNavigate } from 'react-router-dom';
 import { FaArrowLeft } from "react-icons/fa";
 import PostPicSelect from './PostPicSelect';
+import { postChkAtom } from '../../../state/PostAtom';
+import { useRecoilState } from 'recoil';
 
 // 가수, 노래제목, 발매연도, 앨범이름, 사진, 글, 해시태그, 작성자, 비디오아이디
 function PostText({ onClose, videoId, albumImage, musicTitle, musicArtist, albumName, releaseDate }) {
@@ -19,6 +21,7 @@ function PostText({ onClose, videoId, albumImage, musicTitle, musicArtist, album
     const [hashtagList, setHashtagList] = useState([]);
     const [content, setContent] = useState('');
     const [imageSrc, setImageSrc] = useState(albumImage);
+    const [postChk, setPostChk] = useRecoilState(postChkAtom);
 
     const postFeed = () => {
         console.log(
@@ -67,6 +70,7 @@ function PostText({ onClose, videoId, albumImage, musicTitle, musicArtist, album
             .then(response => response.text())
             .then(result => {
                 console.log(result);
+                setPostChk(true);
                 onClose?.();
             })
             .catch(error => console.log('error', error));

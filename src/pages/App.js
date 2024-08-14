@@ -26,15 +26,31 @@ import PlaylistByLikes from '../components/Playlist/PlaylistByLikes';
 import SearchByPlaylist from '../components/Search/SearchByPlaylist';
 import SearchByFeed from '../components/Search/SearchByFeed';
 import SearchByTag from '../components/Search/SearchByTag';
+import { useEffect, useState } from 'react';
 
 
 function App() {
+    const [isLogin, setIsLogin] = useState(false);
+    let loginChk = false;
+
+    if (window.localStorage.getItem("isLogin")) {
+        loginChk = true
+    }
+
+    useEffect(() => {
+        if (loginChk) {
+            setIsLogin(true)
+        }
+    }, []);
+
+
     return (
         <BrowserRouter basename={process.env.PUBLIC_URL}>
             <div className="App" style={{backgroundColor: "black", color: "white"}}>
                 <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/login" element={<Login />} />
+                    {/* <Route path="/" element={<Home />} />
+                    <Route path="/login" element={<Login />} /> */}
+                    <Route path="/" element={isLogin ? <Home /> : <Login />} />
                     <Route path="/signUp" element={<SignUp />} />
                     <Route path="/alarm" element={<Alarm />} />
                     <Route path="/dm" element={<DM />} />

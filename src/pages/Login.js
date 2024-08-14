@@ -102,7 +102,8 @@ function Login() {
                         window.localStorage.setItem('isLogin', true);
                         window.localStorage.setItem("accessToken", accessToken);
                         window.localStorage.setItem("refreshToken", refreshToken);
-                        navigate("/");
+                        // navigate("/");
+                        window.location.reload();
 
                         setTimeout(() => {
                             refreshAccessToken();
