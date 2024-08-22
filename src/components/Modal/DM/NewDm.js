@@ -75,10 +75,9 @@ function NewDm({ onClose }){
     
             if (existingRoom) {
                 console.log("이미 있는 방:", existingRoom);
-                handleClose();
                 setDmroomId(existingRoom.id);
-                // navigate(`/dm/r/${existingRoom.id}`);
-                navigate('/dm')
+                handleClose();
+                navigate(`/dm/${existingRoom.id}`)
                 // setDmListRoomdId(roomId);
             } else {
 
@@ -95,13 +94,18 @@ function NewDm({ onClose }){
                 console.log("새로운 채팅방 생성 결과:", newRoom.data);
                 setDmroomId(newRoom.data.id);
                 handleClose();
-                // navigate(`/dm/r/${newRoom.data.id}`)
-                navigate('/dm')
+                navigate(`/dm/${newRoom.data.id}`)
             }
         } catch (error) {
             console.error("채팅방 확인 또는 생성 중 오류 발생:", error);
         }
     };
+    useEffect(() => {
+        if (dmRoomId) {
+            navigate(`/dm/${dmRoomId}`);
+        }
+    }, [dmRoomId, navigate]);
+
 
     const handleKeyPress = (e)=>{
         if(e.key === 'Enter'){

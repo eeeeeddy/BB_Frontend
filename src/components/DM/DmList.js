@@ -40,7 +40,6 @@ const DmList = ({ selectedChat, selectedChatInfo, setSelectedChatInfo }) => {
 
     const onSelectChat = (roomId) => {
         setRoomId(roomId);
-        console.log(roomId)
 
         const selectedRoomInfo = chatRooms.find(room => room.id === roomId);
 
@@ -79,7 +78,7 @@ const DmList = ({ selectedChat, selectedChatInfo, setSelectedChatInfo }) => {
                                     {Array.isArray(room.participants) && room.participants.length > 0 ? (
                                         <img
                                             src={room.participants.find(participant => participant.participantName !== currentUser)?.participantImgSrc}
-                                            style={{ width: '50px', height: '50px', borderRadius: '50%' , marginRight: '10px' }}
+                                            style={{ width: '50px', height: '50px', borderRadius: '50%' , marginRight: '10px', backgroundColor:'white'}}
                                             alt="Participant Image"
                                         />
                                     ) : null}
@@ -148,3 +147,4 @@ const DmList = ({ selectedChat, selectedChatInfo, setSelectedChatInfo }) => {
 };
 
 export default DmList;
+

@@ -33,6 +33,7 @@
     font-style:normal;
     margin: 0;
     font-size: 20px;
+    display: inline-block;
 }
 
 /* 채팅창 */

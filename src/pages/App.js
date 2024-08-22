@@ -26,6 +26,7 @@ import PlaylistByLikes from '../components/Playlist/PlaylistByLikes';
 import SearchByPlaylist from '../components/Search/SearchByPlaylist';
 import SearchByFeed from '../components/Search/SearchByFeed';
 import SearchByTag from '../components/Search/SearchByTag';
+import { WebSocketConnection } from '../components/WebSocketConnection';
 import { useEffect, useState } from 'react';
 
 
@@ -53,8 +54,8 @@ function App() {
                     <Route path="/" element={isLogin ? <Home /> : <Login />} />
                     <Route path="/signUp" element={<SignUp />} />
                     <Route path="/alarm" element={<Alarm />} />
-                    <Route path="/dm" element={<DM />} />
-                    <Route path='/dm/:dmRoomId' element={<DmRoom />} />
+                    <Route path="/dm/*" element={ <WebSocketConnection> <DM /> </WebSocketConnection> }/>
+                        <Route path=":dmRoomId" element={<DmRoom />} />
                     <Route path="/search" element={<Search />} />
                     <Route path='/search/playlist' element={<SearchByPlaylist />}/>
                     <Route path='/search/feed' element={<SearchByFeed />} />
