@@ -1,18 +1,23 @@
 import * as StompJs from "@stomp/stompjs";
-import { useEffect, useState } from "react";
+import { useRef, useEffect, useState, createContext, useContext } from "react";
 
-export const WebSocket = ({ children }) => {
+const WebSocketContext = createContext();
+export const useWebSocket = () => useContext(WebSocketContext);
+
+export const WebSocketConnection = ({ children }) => {
 
     const client = useRef(null);
     const [ connected, setConnected ] = useState(false);
+    const isLogin = window.localStorage.getItem('isLogin')=== 'true';
 
     useEffect(()=>{
-        connect();
-
+        if(isLogin){
+            connect();
+        }
         return()=>{
             disconnect();
         };
-    },[]);
+    },[isLogin]);
 
     const connect = () => {
         client.current = new StompJs.Client({
@@ -30,20 +35,27 @@ export const WebSocket = ({ children }) => {
                 console.error('Stomp error:', frame);
             },
             onConnect: () => {
-                // console.log('Connected to server');
+                console.log('Connected! 연결성공!');
                 setConnected(true);
             },
         });
         client.current.activate();
+
     };
 
     const disconnect = ()=>{
-        if(client.current.connected ) {
+
+        if (client.current) {
             client.current.deactivate();
-            console.log('Disconnected');
+            setConnected(false);
+            console.log('Disconnected, 연결끊김');
         }
     };
 
-
+    return (
+        <WebSocketContext.Provider value={{ client: client.current, connected }}>
+            {children}
+        </WebSocketContext.Provider>
+    );
 };
 

@@ -2,10 +2,10 @@ import styled from "styled-components";
 
 export const ListContainer = styled.ul`
     overflow-y: auto;
-    height: 70vh;
+    // height: 70vh;
     list-style: none;
     padding: 0;
-    margin: 0;
+    margin: 5%;
 `
 
 export const StyledChatButton = styled.li`
@@ -30,9 +30,9 @@ div {
     padding: 8px;
 
     img {
-        width: 50px;
-        height: 50px;
-        margin-right: 10px;
+        width: 20%;
+        height: 20%;
+        margin-right: 10%;
     }
 }
 `;
